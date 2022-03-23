@@ -1,1 +1,20 @@
-<p>list works!</p>
+<div class="row">
+  <div class="col-md-10">
+    <table class="table table-responsive">
+      <thead>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Body</th>
+      </thead>
+      <tBody>
+        <ng-container *ngFor="let info of allInfo">
+          <tr>
+            <td>{{ info?.id }}</td>
+            <td>{{ info?.title }}</td>
+            <td>{{ info?.body }}</td>
+          </tr>
+        </ng-container>
+      </tBody>
+    </table>
+  </div>
+</div>

@@ -1,16 +1,29 @@
+import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApolloModule, Apollo } from 'apollo-angular';
+import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 
+const uri: string = 'https://graphqlzero.almansi.me/api';
+export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+  return {
+    link: httpLink.create({ uri }),
+    cache: new InMemoryCache(),
+  };
+}
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  exports: [ApolloModule, HttpLinkModule],
+  exports: [HttpLinkModule],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink],
+    },
+  ],
 })
 export class GraphqlModule {
-  constructor(private apollo: Apollo) {
-    const url: string = 'https://graphqlzero.almansi.me/api';
-    console.log('url :>> ', url);
-  }
+  constructor(private apollo: Apollo) {}
 }
