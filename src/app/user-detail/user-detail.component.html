@@ -1,1 +1,28 @@
-<p>user-detail works!</p>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <table class="table table-hover table-responsive">
+      <tbody>
+        <ng-container *ngFor="let user of userData">
+          <tr>
+            <td>Id :-</td>
+            <td>{{ user?.id }}</td>
+          </tr>
+          <tr>
+            <td>Username :-</td>
+            <td>{{ user?.username }}</td>
+          </tr>
+          <tr>
+            <td>Email :-</td>
+            <td>{{ user?.email }}</td>
+          </tr>
+          <tr>
+            <td>Address :-</td>
+            <td>
+              {{ user?.address?.geo?.lat }} & {{ user?.address?.geo?.lng }}
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

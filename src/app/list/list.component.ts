@@ -1,5 +1,6 @@
 import { GraphqlQueryService } from 'src/app/service/graphql-query.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -10,7 +11,7 @@ export class ListComponent implements OnInit {
   public allInfo: any;
   public userData:any = [];
 
-  constructor(private graphqlQueryService: GraphqlQueryService) {}
+  constructor(private graphqlQueryService: GraphqlQueryService,private route:Router) {}
 
   ngOnInit(): void {
     this.getInfo();
@@ -29,10 +30,7 @@ export class ListComponent implements OnInit {
    * getUserInfo
    */
   public getUserInfo(id: string) {
-    this.graphqlQueryService.getUserData(id).then((res) => {
-      this.userData.push(res);
-      console.log('LIST res :>> ', res);
-    });
+    this.route.navigate(['/user', id]);
   }
 
   /**
