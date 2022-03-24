@@ -11,6 +11,7 @@ import { ListComponent } from 'src/app/list/list.component';
 import { UserDetailComponent } from 'src/app/user-detail/user-detail.component';
 import { EditUserInfoComponent } from 'src/app/edit-user-info/edit-user-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreatePostComponent } from 'src/app/create-post/create-post.component';
 
 const uri: string = 'https://graphqlzero.almansi.me/api';
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
@@ -25,6 +26,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     ListComponent,
     UserDetailComponent,
     EditUserInfoComponent,
+    CreatePostComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component';
+import { CreatePostComponent } from 'src/app/create-post/create-post.component';
+import { EditUserInfoComponent } from 'src/app/edit-user-info/edit-user-info.component';
 import { UserDetailComponent } from 'src/app/user-detail/user-detail.component';
 import { ListComponent } from 'src/app/list/list.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +9,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: ListComponent,
+  },
+  {
+    path: 'create-post',
+    component: CreatePostComponent,
   },
   {
     path: 'user',
