@@ -20,6 +20,21 @@ export class GraphqlQueryService {
     }
   `;
 
+  public get_UserData = gql`
+    query ($id: ID!) {
+      user(id: $id) {
+        id
+        username
+        email
+        address {
+          geo {
+            lat
+            lng
+          }
+        }
+      }
+    }
+  `;
 
   public remove_Info = gql`
     mutation ($id: ID!) {
@@ -43,6 +58,25 @@ export class GraphqlQueryService {
         });
     });
   }
+
+  /**
+   * getUserData
+   */
+  public getUserData(key: any) {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .query({
+          query: this.get_UserData,
+          variables: {
+            id: key,
+          },
+        })
+        .subscribe((res: any) => {
+          resolve(res?.data?.user);
+        });
+    });
+  }
+
   /**
    * deletePost
    */
@@ -58,6 +92,7 @@ export class GraphqlQueryService {
         })
         .subscribe((res: any) => {
           resolve(res?.data?.deletePost);
+          console.log('res :>> ', res);
         });
     });
   }

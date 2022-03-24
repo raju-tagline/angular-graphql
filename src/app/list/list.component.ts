@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListComponent implements OnInit {
   public details: any;
   public allInfo: any;
+  public userData:any = [];
 
   constructor(private graphqlQueryService: GraphqlQueryService) {}
 
@@ -25,12 +26,22 @@ export class ListComponent implements OnInit {
   }
 
   /**
+   * getUserInfo
+   */
+  public getUserInfo(id: string) {
+    this.graphqlQueryService.getUserData(id).then((res) => {
+      this.userData.push(res);
+      console.log('LIST res :>> ', res);
+    });
+  }
+
+  /**
    * removeInfo
    */
   public removeInfo(id: number) {
     this.graphqlQueryService.deletePost(id).then((res) => {
       console.log('LIST DELETE res :>> ', res);
-    })
+    });
     //   .then((res) => {
     //   alert('THIS ID DELETED: '+res)
     // });
