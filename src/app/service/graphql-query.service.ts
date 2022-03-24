@@ -52,6 +52,26 @@ export class GraphqlQueryService {
     }
   `;
 
+  //---------GET USER POST---------
+  public get_user_post_info = gql`
+    query ($id: ID!) {
+      post(id: $id) {
+        title
+        body
+      }
+    }
+  `;
+
+  //---------EDIT USER INFORMATION---------
+  public edit_User_Info = gql`
+    mutation ($id: ID!, $input: UpdatePostInput!) {
+      updatePost(id: $id, input: $input) {
+        id
+        body
+      }
+    }
+  `;
+
   //---------DELETE POST---------
   public remove_Info = gql`
     mutation ($id: ID!) {
@@ -95,6 +115,24 @@ export class GraphqlQueryService {
   }
 
   /**
+   * get_user_post_info
+   */
+  public getSinglePost(key: any) {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .query({
+          query: this.get_user_post_info,
+          variables: {
+            id: key,
+          },
+        })
+        .subscribe((res: any) => {
+          resolve(res?.data?.post);
+        });
+    });
+  }
+
+  /**
    * getUserPosts
    */
   public getUserPosts(key: any) {
@@ -108,6 +146,27 @@ export class GraphqlQueryService {
         })
         .subscribe((res: any) => {
           resolve(res?.data?.user?.posts?.data);
+        });
+    });
+  }
+
+  /**
+   * editUser
+   */
+  public editUser(key: any, body: string) {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .mutate({
+          mutation: this.edit_User_Info,
+          variables: {
+            id: key,
+            input: {
+              body: body,
+            },
+          },
+        })
+        .subscribe((res: any) => {
+          console.log('res :>> ', res);
         });
     });
   }
