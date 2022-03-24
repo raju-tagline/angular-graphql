@@ -16,7 +16,7 @@
             <td>{{ info?.title }}</td>
             <td>{{ info?.body }}</td>
             <td>
-              <button class="btn btn-sm btn-success">Edit</button>
+              <button class="btn btn-sm btn-success" (click)="editUserInfo(info?.id)">Edit</button>
             </td>
             <td>
               <button

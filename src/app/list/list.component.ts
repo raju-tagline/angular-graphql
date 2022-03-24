@@ -37,6 +37,13 @@ export class ListComponent implements OnInit {
   }
 
   /**
+   * editUserInfo
+   */
+  public editUserInfo(id:string) {
+    this.route.navigate(['/edit-user',id])
+  }
+
+  /**
    * removeInfo
    */
   public removeInfo(id: number) {
