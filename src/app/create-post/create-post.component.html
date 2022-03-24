@@ -1,1 +1,17 @@
-<p>create-post works!</p>
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title" />
+      </div>
+      <div>
+        <label for="body">Body</label>
+        <input type="text" id="body" class="form-control" formControlName="body" />
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

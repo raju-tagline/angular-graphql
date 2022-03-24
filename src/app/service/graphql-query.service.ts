@@ -72,6 +72,17 @@ export class GraphqlQueryService {
     }
   `;
 
+  //---------CREATE POST---------
+  public create_Post = gql`
+    mutation ($input: CreatePostInput!) {
+      createPost(input: $input) {
+        id
+        title
+        body
+      }
+    }
+  `;
+
   //---------DELETE POST---------
   public remove_Info = gql`
     mutation ($id: ID!) {
@@ -161,6 +172,27 @@ export class GraphqlQueryService {
           variables: {
             id: key,
             input: {
+              body: body,
+            },
+          },
+        })
+        .subscribe((res: any) => {
+          console.log('res :>> ', res);
+        });
+    });
+  }
+
+  /**
+   * createUserPost
+   */
+  public createUserPost(title: string, body: string) {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .mutate({
+          mutation: this.create_Post,
+          variables: {
+            input: {
+              title: title,
               body: body,
             },
           },
