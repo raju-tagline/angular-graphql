@@ -35,17 +35,6 @@ export class GraphqlQueryService {
         .valueChanges.subscribe((res: any) => {
           resolve(res?.data?.posts?.data);
         });
-
-      //   .pipe(map((res) => {
-      //   resolve(console.log('res :>> ', res));
-      // }))
     });
-    // this.apollo
-    //   .watchQuery({
-    //     query: this.Get_AllInfo,
-    //   })
-    //   .valueChanges.subscribe((res: any) => {
-    //     this.allInfo = res?.data?.posts?.data;
-    //   });
   }
 }

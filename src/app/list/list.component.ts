@@ -1,21 +1,5 @@
-import { Apollo, gql } from 'apollo-angular';
+import { GraphqlQueryService } from './../service/graphql-query.service';
 import { Component, OnInit } from '@angular/core';
-
-const Get_AllInfo = gql`
-  query ($options: PageQueryOptions) {
-    posts(options: $options) {
-      data {
-        id
-        title
-        body
-      }
-      meta {
-        totalCount
-      }
-    }
-  }
-`;
-
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -25,15 +9,11 @@ export class ListComponent implements OnInit {
   public details: any;
   public allInfo: any;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private graphqlQueryService: GraphqlQueryService) {}
 
   ngOnInit(): void {
-    this.details = this.apollo
-      .watchQuery({
-        query: Get_AllInfo,
-      })
-      .valueChanges.subscribe((res: any) => {
-        this.allInfo = res?.data?.posts?.data;
-      });
+    this.graphqlQueryService.getPosts().then((res: any) => {
+      this.allInfo = res;
+    });
   }
 }
