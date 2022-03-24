@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { ListComponent } from 'src/app/list/list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const uri: string = 'https://graphqlzero.almansi.me/api';
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
@@ -17,7 +18,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   };
 }
 @NgModule({
-  declarations: [AppComponent, ListComponent],
+  declarations: [AppComponent, ListComponent, UserDetailComponent],
   imports: [BrowserModule, AppRoutingModule, ApolloModule, HttpClientModule],
   providers: [
     {
