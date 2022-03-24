@@ -5,6 +5,7 @@ import { Apollo, gql } from 'apollo-angular';
   providedIn: 'root',
 })
 export class GraphqlQueryService {
+  //---------ALL POSTS DETAILS---------
   public Get_AllInfo = gql`
     query ($options: PageQueryOptions) {
       posts(options: $options) {
@@ -20,6 +21,7 @@ export class GraphqlQueryService {
     }
   `;
 
+  //---------GET USER'S DATA---------
   public get_UserData = gql`
     query ($id: ID!) {
       user(id: $id) {
@@ -36,6 +38,21 @@ export class GraphqlQueryService {
     }
   `;
 
+  //---------GET USER'S POSTS---------
+  public get_User_Post = gql`
+    query ($id: ID!) {
+      user(id: $id) {
+        posts {
+          data {
+            id
+            title
+          }
+        }
+      }
+    }
+  `;
+
+  //---------DELETE POST---------
   public remove_Info = gql`
     mutation ($id: ID!) {
       deletePost(id: $id)
@@ -78,10 +95,27 @@ export class GraphqlQueryService {
   }
 
   /**
+   * getUserPosts
+   */
+  public getUserPosts(key: any) {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .query({
+          query: this.get_User_Post,
+          variables: {
+            id: key,
+          },
+        })
+        .subscribe((res: any) => {
+          resolve(res?.data?.user?.posts?.data);
+        });
+    });
+  }
+
+  /**
    * deletePost
    */
   public deletePost(key: number) {
-    console.log('key :>> ', key);
     return new Promise((resolve, reject) => {
       this.apollo
         .mutate({
@@ -92,7 +126,6 @@ export class GraphqlQueryService {
         })
         .subscribe((res: any) => {
           resolve(res?.data?.deletePost);
-          console.log('res :>> ', res);
         });
     });
   }

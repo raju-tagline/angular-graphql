@@ -24,5 +24,26 @@
         </ng-container>
       </tbody>
     </table>
+    <button class="btn btn-sm btn-warning" (click)="getUserPostInfo()">Get User Posts</button>
+  </div>
+</div>
+<div class="row justify-content-center" *ngIf="isUserPost">
+  <div class="col-md-8">
+    <table class="table">
+      <thead>
+      <th>S.No</th>
+      <th>Id</th>
+      <th>Title</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let post of userPosts;let i = index">
+        <tr>
+          <td>{{ i+1 }}</td>
+          <td>{{ post.id }}</td>
+          <td>{{ post.title }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+    </table>
   </div>
 </div>

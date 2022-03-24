@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 export class ListComponent implements OnInit {
   public details: any;
   public allInfo: any;
-  public userData:any = [];
+  public userData: any = [];
 
-  constructor(private graphqlQueryService: GraphqlQueryService,private route:Router) {}
+  constructor(
+    private graphqlQueryService: GraphqlQueryService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     this.getInfo();
@@ -38,11 +41,8 @@ export class ListComponent implements OnInit {
    */
   public removeInfo(id: number) {
     this.graphqlQueryService.deletePost(id).then((res) => {
-      console.log('LIST DELETE res :>> ', res);
+      alert('THIS ID DELETED: ' + res);
     });
-    //   .then((res) => {
-    //   alert('THIS ID DELETED: '+res)
-    // });
     this.getInfo();
   }
 }

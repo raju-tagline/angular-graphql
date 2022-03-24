@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailComponent implements OnInit {
   public userData: any = [];
+  public userPosts: any = [];
+  public isUserPost: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,4 +31,14 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  /**
+   * getUserPostInfo
+   */
+  public getUserPostInfo() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.graphqlQueryService.getUserPosts(id).then((res) => {
+      this.userPosts = res;
+      this.isUserPost = true;
+    });
+  }
 }
