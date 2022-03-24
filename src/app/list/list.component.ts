@@ -1,4 +1,4 @@
-import { GraphqlQueryService } from './../service/graphql-query.service';
+import { GraphqlQueryService } from 'src/app/service/graphql-query.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-list',
