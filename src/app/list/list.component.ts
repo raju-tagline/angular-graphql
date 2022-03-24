@@ -12,8 +12,28 @@ export class ListComponent implements OnInit {
   constructor(private graphqlQueryService: GraphqlQueryService) {}
 
   ngOnInit(): void {
+    this.getInfo();
+  }
+
+  /**
+   * getInfo
+   */
+  public getInfo() {
     this.graphqlQueryService.getPosts().then((res: any) => {
       this.allInfo = res;
     });
+  }
+
+  /**
+   * removeInfo
+   */
+  public removeInfo(id: number) {
+    this.graphqlQueryService.deletePost(id).then((res) => {
+      console.log('LIST DELETE res :>> ', res);
+    })
+    //   .then((res) => {
+    //   alert('THIS ID DELETED: '+res)
+    // });
+    this.getInfo();
   }
 }

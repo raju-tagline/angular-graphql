@@ -5,6 +5,8 @@
         <th>Id</th>
         <th>Title</th>
         <th>Body</th>
+        <th>Edit</th>
+        <th>Remove</th>
       </thead>
       <tBody>
         <ng-container *ngFor="let info of allInfo">
@@ -12,6 +14,17 @@
             <td>{{ info?.id }}</td>
             <td>{{ info?.title }}</td>
             <td>{{ info?.body }}</td>
+            <td>
+              <button class="btn btn-sm btn-success">Edit</button>
+            </td>
+            <td>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="removeInfo(info?.id)"
+              >
+                Remove
+              </button>
+            </td>
           </tr>
         </ng-container>
       </tBody>

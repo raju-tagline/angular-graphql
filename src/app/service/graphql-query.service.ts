@@ -20,13 +20,19 @@ export class GraphqlQueryService {
     }
   `;
 
+
+  public remove_Info = gql`
+    mutation ($id: ID!) {
+      deletePost(id: $id)
+    }
+  `;
+
   constructor(private apollo: Apollo) {}
 
   /**
    * getPosts
    */
   public getPosts() {
-    console.log('This is Working!!');
     return new Promise((resolve, reject) => {
       this.apollo
         .watchQuery({
@@ -34,6 +40,24 @@ export class GraphqlQueryService {
         })
         .valueChanges.subscribe((res: any) => {
           resolve(res?.data?.posts?.data);
+        });
+    });
+  }
+  /**
+   * deletePost
+   */
+  public deletePost(key: number) {
+    console.log('key :>> ', key);
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .mutate({
+          mutation: this.remove_Info,
+          variables: {
+            id: key,
+          },
+        })
+        .subscribe((res: any) => {
+          resolve(res?.data?.deletePost);
         });
     });
   }
